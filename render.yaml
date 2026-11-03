@@ -1,0 +1,51 @@
+# Test fixture for the triage-workspaces skill. Every secret value is fake.
+# Apply this Blueprint in the throwaway @test.render.com workspace only.
+services:
+  - type: web
+    name: triage-test-slack-bot
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: SLACK_BOT_TOKEN
+        value: not-a-real-secret
+  - type: web
+    name: triage-test-github-admin
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: GITHUB_TOKEN
+        value: not-a-real-secret
+  - type: web
+    name: triage-test-scratch
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: INTERNAL_API_KEY
+        value: not-a-real-secret
+  - type: web
+    name: triage-test-public-demo
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+  - type: web
+    name: triage-test-abandoned-site
+    runtime: static
+    buildCommand: echo ok
+    staticPublishPath: .
+    autoDeployTrigger: "off"
+  - type: keyvalue
+    name: triage-test-kv
+    plan: free
+    ipAllowList: []
+
+databases:
+  - name: triage-test-db
+    plan: free
+    ipAllowList: []
